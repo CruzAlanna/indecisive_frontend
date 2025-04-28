@@ -6,7 +6,11 @@ function MenuShow({ food }) {
       <hr></hr>
       <p>Description: This {food.main_ingredient} dish is {food.taste}</p>
       <p>Served: {food.temp}</p>
-      <p>Protein: {food.protein}</p>
+      {food.category_id < 4 ? (
+        <div>
+          <p>Protein: {food.protein}</p>
+        </div>
+      ) : null }
       <p>Cooking Method: {food.cooking_method}</p>
     </div>
   )

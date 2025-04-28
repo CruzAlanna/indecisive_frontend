@@ -3,7 +3,7 @@ function MenuIndex({ foods, categories, onShow }) {
     <div>
       <div style={{ textAlign: 'center' }}>
         <h1>Menu</h1>
-        <p>-({foods.length}) dishes to choose from!-</p>
+        <p>({foods.length}) dishes to choose from!</p>
       </div>
       <hr></hr>
       {categories.map((category) => (

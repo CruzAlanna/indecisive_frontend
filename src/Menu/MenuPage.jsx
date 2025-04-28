@@ -26,7 +26,7 @@ function MenuPage() {
     setCurrentFood(food);
   };
 
-  useEffect(handleIndex, []);
+  useEffect(handleIndex, []); //see what taking this out does bc we're not updating the data
 
   return (
     <main>
