@@ -73,75 +73,69 @@ function QuizShow() {
   return (
     <div className="quiz-box">
       {questions.length > 0 && currentQuestion < questions.length ? (
-      <div>
-        <h2>{questions[currentQuestion].q}</h2>
         <div>
-          {(() => {
-            switch (currentQuestion) {
-              case 0:
-                return categories.map((category) => (
-                  <button key={category.id} onClick={() => handleNextQuestion(category)}>
-                    {category.name}
-                  </button>
-                )
-              );
-              case 1:
-                return suggestions.map((food) => (
-                  <button key={food.id} onClick={() => handleNextQuestion(food)}>
-                    {food.style}
-                  </button>
-                )
-              );
-              case 2:
-                return suggestions.map((food) => (
-                  <button key={food.id} onClick={() => handleNextQuestion(food)}>
-                    {food.main_ingredient}
-                  </button>
-                )
-              );
-              case 3:
-                return suggestions.map((food) => (
-                  <div key={food.id}>
-                    { food.category_id < 4 ? (
-                      <button onClick={() => handleNextQuestion(food)}>
-                        {food.temp}
-                      </button>
-                    ) : (
-                      <button onClick={() => handleDessertsNextQuestion(food)}>
-                        {food.temp}
-                      </button>
-                    )}
-                  </div>
-                )
-              );
-              case 4:
-                return suggestions.map((food) => (
-                  <button key={food.id} onClick={() => handleNextQuestion(food)}>
-                    {food.protein}
-                  </button>
-                )
-              );
-              case 5:
-                return suggestions.map((food) => (
-                  <button key={food.id} onClick={() => handleNextQuestion(food)}>
-                    {food.taste}
-                  </button>
-                )
-              );
-              case 6:
-                return suggestions.map((food) => (
-                  <button key={food.id} onClick={() => handleNextQuestion(food)}>
-                    {food.cooking_method}
-                  </button>
-                )
-              );
-            }
-          })()}
+          <h2>{questions[currentQuestion].q}</h2>
+          <div>
+            {(() => {
+              switch (currentQuestion) {
+                case 0:
+                  return categories.map((category) => (
+                    <button key={category.id} onClick={() => handleNextQuestion(category)}>
+                      {category.name}
+                    </button>
+                  ));
+                case 1:
+                  return suggestions.map((food) => (
+                    <button key={food.id} onClick={() => handleNextQuestion(food)}>
+                      {food.style}
+                    </button>
+                  ));
+                case 2:
+                  return suggestions.map((food) => (
+                    <button key={food.id} onClick={() => handleNextQuestion(food)}>
+                      {food.main_ingredient}
+                    </button>
+                  ));
+                case 3:
+                  return suggestions.map((food) => (
+                    <div key={food.id}>
+                      {food.category_id < 4 ? (
+                        <button onClick={() => handleNextQuestion(food)}>
+                          {food.temp}
+                        </button>
+                      ) : (
+                        <button onClick={() => handleDessertsNextQuestion(food)}>
+                          {food.temp}
+                        </button>
+                      )}
+                    </div>
+                  ));
+                case 4:
+                  return suggestions.map((food) => (
+                    <button key={food.id} onClick={() => handleNextQuestion(food)}>
+                      {food.protein}
+                    </button>
+                  ));
+                case 5:
+                  return suggestions.map((food) => (
+                    <button key={food.id} onClick={() => handleNextQuestion(food)}>
+                      {food.taste}
+                    </button>
+                  ));
+                case 6:
+                  return suggestions.map((food) => (
+                    <button key={food.id} onClick={() => handleNextQuestion(food)}>
+                      {food.cooking_method}
+                    </button>
+                  ));
+              }
+            })()}
+          </div>
         </div>
-      </div>
-    ) : (
-      <h1>Quiz Completed!</h1>
-    )}
+      ) : (
+        <h1>Quiz Completed!</h1>
+      )}
+  
       {currentQuestion < questions.length ? (
         <button
           style={{
@@ -157,30 +151,32 @@ function QuizShow() {
         >
           SKIP
         </button>
-      ) : null }
+      ) : null}
   
       {currentQuestion >= questions.length ? (
         <div>
           <h1>Your Suggestions:</h1>
-          <hr></hr>
+          <hr />
           {suggestions.map((food) => (
             <div key={food.id}>
-              <h3>{food.name} ({food.style})</h3>
+              <h3>
+                {food.name} ({food.style})
+              </h3>
               <p>Description: This {food.main_ingredient} dish is {food.taste}</p>
               <p>Served: {food.temp}</p>
               {food.category_id < 4 ? (
                 <div>
                   <p>Protein: {food.protein}</p>
                 </div>
-              ) : null }
+              ) : null}
               <p>Cooking Method: {food.cooking_method}</p>
-              <hr></hr>
+              <hr />
             </div>
           ))}
         </div>
       ) : null}
     </div>
-  );  
+  );   
 }
 
 export default QuizShow;

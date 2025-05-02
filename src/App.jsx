@@ -4,6 +4,7 @@ import About from './pages/AboutPage'
 import MenuPage from './Menu/MenuPage'
 import QuizPage from './Quiz/QuizPage'
 import RandomPage from './RandomSelect/RandomPage'
+import CouplesPage from './CouplesQuiz/CouplesPage'
 import Footer from './Footer'
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
         <QuizPage />
         <hr></hr>
         <RandomPage />
+        <hr></hr>
+        <CouplesPage />
         <hr></hr>
         <Footer />
       </div>

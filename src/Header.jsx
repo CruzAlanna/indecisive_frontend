@@ -8,7 +8,7 @@ function Header() {
         </div>
         
         <nav>
-          <a href="#">Menu</a> | <a href="#">Quiz</a> | <a href="#">Partners</a> | <a href="#">Random</a>
+          <a href="#">Menu</a> | <a href="#">Quiz</a> | <a href="#">Couple's Quiz</a> | <a href="#">Random</a>
         </nav>
       </div>
     </header>
