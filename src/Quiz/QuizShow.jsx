@@ -85,19 +85,33 @@ function QuizShow() {
                     </button>
                   ));
                 case 1:
-                  return suggestions.map((food) => (
-                    <button key={food.id} onClick={() => handleNextQuestion(food)}>
-                      {food.style}
-                    </button>
+                  return suggestions
+                  .filter((food, index, self) =>
+                    index === self.findIndex(f => f.style === food.style)
+                  )
+                  .map((food) => (
+                    <div key={food.id}>
+                      <button key={food.id} onClick={() => handleNextQuestion(food)}>
+                        {food.style}
+                      </button>
+                    </div>
                   ));
                 case 2:
-                  return suggestions.map((food) => (
+                  return suggestions
+                  .filter((food, index, self) =>
+                    index === self.findIndex(f => f.main_ingredient === food.main_ingredient)
+                  )
+                  .map((food) => (
                     <button key={food.id} onClick={() => handleNextQuestion(food)}>
                       {food.main_ingredient}
                     </button>
                   ));
                 case 3:
-                  return suggestions.map((food) => (
+                  return suggestions
+                  .filter((food, index, self) =>
+                    index === self.findIndex(f => f.temp === food.temp)
+                  )
+                  .map((food) => (
                     <div key={food.id}>
                       {food.category_id < 4 ? (
                         <button onClick={() => handleNextQuestion(food)}>
@@ -111,19 +125,31 @@ function QuizShow() {
                     </div>
                   ));
                 case 4:
-                  return suggestions.map((food) => (
+                  return suggestions
+                  .filter((food, index, self) =>
+                    index === self.findIndex(f => f.protein === food.protein)
+                  )
+                  .map((food) => (
                     <button key={food.id} onClick={() => handleNextQuestion(food)}>
                       {food.protein}
                     </button>
                   ));
                 case 5:
-                  return suggestions.map((food) => (
+                  return suggestions
+                  .filter((food, index, self) =>
+                    index === self.findIndex(f => f.taste === food.taste)
+                  )
+                  .map((food) => (
                     <button key={food.id} onClick={() => handleNextQuestion(food)}>
                       {food.taste}
                     </button>
                   ));
                 case 6:
-                  return suggestions.map((food) => (
+                  return suggestions
+                  .filter((food, index, self) =>
+                    index === self.findIndex(f => f.cooking_method === food.cooking_method)
+                  )
+                  .map((food) => (
                     <button key={food.id} onClick={() => handleNextQuestion(food)}>
                       {food.cooking_method}
                     </button>

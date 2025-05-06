@@ -21,6 +21,14 @@
   break-inside: avoid;
 }
 
+.menu-display {
+  columns: 4;
+}
+
+.restaurant-display {
+  columns: 5;
+}
+
 button {
   margin: 5px;
   padding: 10px 20px;

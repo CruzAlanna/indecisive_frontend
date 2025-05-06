@@ -163,19 +163,31 @@ function CouplesShow() {
                         </button>
                       ));
                     case 1:
-                      return p1Suggestions.map((food) => (
+                      return p1Suggestions
+                      .filter((food, index, self) =>
+                        index === self.findIndex(f => f.style === food.style)
+                      )
+                      .map((food) => (
                         <button key={food.id} onClick={() => handleNextQuestion(food)}>
                           {food.style}
                         </button>
                       ));
                     case 2:
-                      return p1Suggestions.map((food) => (
+                      return p1Suggestions
+                      .filter((food, index, self) =>
+                        index === self.findIndex(f => f.main_ingredient === food.main_ingredient)
+                      )
+                      .map((food) => (
                         <button key={food.id} onClick={() => handleNextQuestion(food)}>
                           {food.main_ingredient}
                         </button>
                       ));
                     case 3:
-                      return p1Suggestions.map((food) => (
+                      return p1Suggestions
+                      .filter((food, index, self) =>
+                        index === self.findIndex(f => f.temp === food.temp)
+                      )
+                      .map((food) => (
                         <div key={food.id}>
                           {food.category_id < 4 ? (
                             <button onClick={() => handleNextQuestion(food)}>
@@ -189,19 +201,31 @@ function CouplesShow() {
                         </div>
                       ));
                     case 4:
-                      return p1Suggestions.map((food) => (
+                      return p1Suggestions
+                      .filter((food, index, self) =>
+                        index === self.findIndex(f => f.protein === food.protein)
+                      )
+                      .map((food) => (
                         <button key={food.id} onClick={() => handleNextQuestion(food)}>
                           {food.protein}
                         </button>
                       ));
                     case 5:
-                      return p1Suggestions.map((food) => (
+                      return p1Suggestions
+                      .filter((food, index, self) =>
+                        index === self.findIndex(f => f.taste === food.taste)
+                      )
+                      .map((food) => (
                         <button key={food.id} onClick={() => handleNextQuestion(food)}>
                           {food.taste}
                         </button>
                       ));
                     case 6:
-                      return p1Suggestions.map((food) => (
+                      return p1Suggestions
+                      .filter((food, index, self) =>
+                        index === self.findIndex(f => f.cooking_method === food.cooking_method)
+                      )
+                      .map((food) => (
                         <button key={food.id} onClick={() => handleNextQuestion(food)}>
                           {food.cooking_method}
                         </button>
@@ -230,26 +254,38 @@ function CouplesShow() {
               <div>
                 {(() => {
                   switch (currentQuestion) {
-                    case 0: //SHOULDNT BE CALLED IF CHANGE PARTNER IS DONE CORRECTLY
+                    case 0: //SHOULDNT BE CALLED
                       return categories.map((category) => (
                         <button key={category.id} onClick={() => handleNextQuestion(category)}>
                           {category.name}
                         </button>
                       ));
                     case 1:
-                      return p2Suggestions.map((food) => (
+                      return p2Suggestions
+                      .filter((food, index, self) =>
+                        index === self.findIndex(f => f.style === food.style)
+                      )
+                      .map((food) => (
                         <button key={food.id} onClick={() => handleNextQuestion(food)}>
                           {food.style}
                         </button>
                       ));
                     case 2:
-                      return p2Suggestions.map((food) => (
+                      return p2Suggestions
+                      .filter((food, index, self) =>
+                        index === self.findIndex(f => f.main_ingredient === food.main_ingredient)
+                      )
+                      .map((food) => (
                         <button key={food.id} onClick={() => handleNextQuestion(food)}>
                           {food.main_ingredient}
                         </button>
                       ));
                     case 3:
-                      return p2Suggestions.map((food) => (
+                      return p2Suggestions
+                      .filter((food, index, self) =>
+                        index === self.findIndex(f => f.temp === food.temp)
+                      )
+                      .map((food) => (
                         <div key={food.id}>
                           {food.category_id < 4 ? (
                             <button onClick={() => handleNextQuestion(food)}>
@@ -263,19 +299,31 @@ function CouplesShow() {
                         </div>
                       ));
                     case 4:
-                      return p2Suggestions.map((food) => (
+                      return p2Suggestions
+                      .filter((food, index, self) =>
+                        index === self.findIndex(f => f.protein === food.protein)
+                      )
+                      .map((food) => (
                         <button key={food.id} onClick={() => handleNextQuestion(food)}>
                           {food.protein}
                         </button>
                       ));
                     case 5:
-                      return p2Suggestions.map((food) => (
+                      return p2Suggestions
+                      .filter((food, index, self) =>
+                        index === self.findIndex(f => f.taste === food.taste)
+                      )
+                      .map((food) => (
                         <button key={food.id} onClick={() => handleNextQuestion(food)}>
                           {food.taste}
                         </button>
                       ));
                     case 6:
-                      return p2Suggestions.map((food) => (
+                      return p2Suggestions
+                      .filter((food, index, self) =>
+                        index === self.findIndex(f => f.cooking_method === food.cooking_method)
+                      )
+                      .map((food) => (
                         <button key={food.id} onClick={() => handleNextQuestion(food)}>
                           {food.cooking_method}
                         </button>

@@ -1,33 +1,16 @@
 import './App.css'
 import Header from './Header'
-import About from './pages/AboutPage'
-import MenuPage from './Menu/MenuPage'
-import QuizPage from './Quiz/QuizPage'
-import RandomPage from './RandomSelect/RandomPage'
-import CouplesPage from './CouplesQuiz/CouplesPage'
+import { Outlet } from 'react-router-dom';
 import Footer from './Footer'
 
 function App() {
   return (
-    <div>
-      <div style={{ textAlign: 'center' }}>
-        <Header />
-        <hr></hr>
-        <About />
-        <hr></hr>
-      </div>
-      <MenuPage />
+    <div style={{ textAlign: 'center' }}>
+      <Header />
       <hr></hr>
-      <div style={{ textAlign: 'center' }}>
-        <QuizPage />
-        <hr></hr>
-        <RandomPage />
-        <hr></hr>
-        <CouplesPage />
-        <hr></hr>
-        <Footer />
-      </div>
-      
+      <Outlet />
+      <hr></hr>
+      <Footer />
     </div>
   )
 }

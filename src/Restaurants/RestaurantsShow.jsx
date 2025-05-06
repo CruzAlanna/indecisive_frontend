@@ -1,23 +1,21 @@
-function MenuIndex({ foods, categories, onShow }) {
+function RestaurantsShow({ restaurant, foods, categories }) {
   return (
     <div>
-      <div style={{ textAlign: 'center' }}>
-        <h1>Menu</h1>
-        <p>{foods.length} dishes to choose from!</p>
-      </div>
+      <h1>{restaurant.name} located in {restaurant.location}</h1>
+      <h3>{restaurant.style}</h3>
       <hr></hr>
-      <div className="menu-display">
+      <div className="restaurant.menu-display">
         {categories.map((category) => (
           <div key={category.id}>
             <div className="container">
               <h2>{category.name}</h2>
-              {/* Filter foods by category.id */}
+              {/* Filter foods by category.id and restaurant.id*/}
               {foods
                 .filter((food) => food.category_id === category.id)
+                .filter((food) => food.restaurant_id === restaurant.id)
                 .map((food) => (
                   <div key={food.id}>
                     <p>{food.name}</p>
-                    <button onClick={() => onShow(food) }>View Dish Details</button>
                   </div>
                 ))}
             </div>
@@ -28,4 +26,4 @@ function MenuIndex({ foods, categories, onShow }) {
   )
 }
 
-export default MenuIndex;
+export default RestaurantsShow;
