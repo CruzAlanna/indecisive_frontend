@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function About() {
   return (
     <div className="about">
@@ -11,13 +13,15 @@ function About() {
       <br></br>
       <nav className="about-nav">
         <h3>There are several options to choose from!</h3>
-        <button>Take a Quiz</button>
+        <button><Link to="/quiz" className="about-button">Take Quiz</Link></button>
         <br></br>
-        <button>View Menu</button>
+        <button><Link to="/menu" className="about-button">View Menu</Link></button>
         <br></br>
-        <button>Couple's Quiz</button>
+        <button><Link to="/restaurants" className="about-button">View Restaurants</Link></button>
         <br></br>
-        <button>Random Suggestion</button>
+        <button><Link to="/partners" className="about-button">Take Couple's Quiz</Link></button>
+        <br></br>
+        <button><Link to="/random" className="about-button">Random Suggestion</Link></button>
       </nav>
     </div>
   )

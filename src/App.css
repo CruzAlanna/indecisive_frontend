@@ -2,6 +2,11 @@
   font-size: x-large;
 }
 
+.about-button {
+  color: rgb(0, 0, 0); /* Ensures the link appears black */
+  text-decoration: none; /* Removes the underline */
+}
+
 .message {
   /* max-width: 600px; */
   padding: 15px;

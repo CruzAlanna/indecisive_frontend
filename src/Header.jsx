@@ -8,7 +8,7 @@ function Header() {
           <h1>Indecis¿ve</h1>
         </div>
         <nav style={{ background: '#eee', padding: '10px', marginBottom: '20px' }}>
-          <ul style={{ listStyle: 'none', display: 'flex', gap: '15px', margin: 0, padding: 0, alignItems: 'center' }}>
+          <ul style={{ listStyle: 'none', display: 'flex', alignItems: 'center', gap: '15px', margin: 0, padding: 0 }}>
             <li><Link to="/">About</Link></li>
             <li><Link to="/menu">Menu</Link></li>
             <li><Link to="/restaurants">Restaurants</Link></li>
