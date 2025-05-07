@@ -4,7 +4,19 @@ function MenuIndex({ foods, categories, onShow }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchAttribute, setSearchAttribute] = useState('name');
 
-  const attributes = ['name', 'style', 'main_ingredient', 'temp', 'protein', 'taste', 'cooking_method'];
+    // Map database attributes to readable names
+    const attributeLabels = {
+      name: "Dish Name",
+      style: "Cuisine Style",
+      main_ingredient: "Main Ingredient",
+      temp: "Serving Temperature",
+      protein: "Protein",
+      taste: "Flavor Profile",
+      cooking_method: "Cooking Method",
+    };
+  
+    // Convert object keys into an array for dropdown options
+    const attributeKeys = Object.keys(attributeLabels);
 
   const filteredFoods = foods.filter((food) => {
     if (!searchQuery) return true; // Show all if searchQuery is empty
@@ -26,8 +38,10 @@ function MenuIndex({ foods, categories, onShow }) {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
         <select value={searchAttribute} onChange={(e) => setSearchAttribute(e.target.value)}>
-          {attributes.map((attr) => (
-            <option key={attr} value={attr}>{attr}</option>
+          {attributeKeys.map((attr) => (
+            <option key={attr} value={attr}>
+              {attributeLabels[attr]}
+            </option>
           ))}
         </select>
       </div>

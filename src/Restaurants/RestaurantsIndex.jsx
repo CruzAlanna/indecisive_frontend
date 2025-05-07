@@ -4,8 +4,13 @@ function RestaurantsIndex({ restaurants, onShow }) {
   const [searchQuery, setSearchQuery] = useState('');
     const [searchAttribute, setSearchAttribute] = useState('name');
   
-    const attributes = ['name', 'style'];
+    const attributeLabels = {
+      name: "Restaurant Name",
+      style: "Cuisine Style"
+    };
   
+    const attributeKeys = Object.keys(attributeLabels);
+
     const filteredRestaurants = restaurants.filter((restaurant) => {
       if (!searchQuery) return true;
       return restaurant[searchAttribute]?.toLowerCase().includes(searchQuery.toLowerCase());
@@ -26,8 +31,10 @@ function RestaurantsIndex({ restaurants, onShow }) {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
         <select value={searchAttribute} onChange={(e) => setSearchAttribute(e.target.value)}>
-          {attributes.map((attr) => (
-            <option key={attr} value={attr}>{attr}</option>
+          {attributeKeys.map((attr) => (
+            <option key={attr} value={attr}>
+              {attributeLabels[attr]}
+            </option>
           ))}
         </select>
       </div>
