@@ -12,113 +12,170 @@ function CouplesShow() {
   const [p2Suggestions, setP2Suggestions] = useState([]); // Foods filtered by answers for PARTNER2/ PERSON2
   const [suggestions, setSuggestions] = useState([]); // For combined arrays
   const [checkMatching, setCheckMatching] = useState(null);
-  
-  const handleNextQuestion = (selectedOption) => {
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [dessertCheck, setDessertCheck]= useState(false);
+
+  const handleSelection = (selectedOption) => {
+    setSelectedOptions((prevSelections) => 
+      prevSelections.includes(selectedOption) ? prevSelections.filter((selections) => selections !== selectedOption) : [...prevSelections, selectedOption]
+    );
+    console.log(selectedOptions);
+  }
+
+  const handleNextQuestion = () => {
     if (currentQuestion === 0) {
-      const foodsCategory = foods.filter((food) => food.category_id === selectedOption.id);
+      const foodsCategory = foods.filter((food) => 
+        selectedOptions.some(option => food.category_id === option.id)
+      );
       setP1Suggestions(foodsCategory);
       setP2Suggestions(foodsCategory);
       console.log(p1Suggestions);
       console.log(p2Suggestions);
+      if (selectedOptions.length === 1 && selectedOptions.some(option => option.id === 4)) {
+        setDessertCheck(true);
+      };
     } else if (currentQuestion === 1) {
       if (currentPartner === 0) {
-        var filteredFoods1 = p1Suggestions.filter((food) => food.style === selectedOption.style);
+        var filteredFoods1 = p1Suggestions.filter((food) =>
+          selectedOptions.some(option => food.style === option.style)
+        );
         setP1Suggestions(filteredFoods1);
         console.log(p1Suggestions);
       } else if (currentPartner === 1) {
-        var filteredFoods2 = p2Suggestions.filter((food) => food.style === selectedOption.style);
+        var filteredFoods2 = p2Suggestions.filter((food) => 
+          selectedOptions.some(option => food.style === option.style)
+        );
         setP2Suggestions(filteredFoods2);
         console.log(p2Suggestions);
       };
     } else if (currentQuestion === 2) {
       if (currentPartner === 0) {
-        var filteredFoods1 = p1Suggestions.filter((food) => food.main_ingredient === selectedOption.main_ingredient);
+        var filteredFoods1 = p1Suggestions.filter((food) =>
+          selectedOptions.some(option => food.main_ingredient === option.main_ingredient)
+        );
         setP1Suggestions(filteredFoods1);
         console.log(p1Suggestions);
       } else if (currentPartner === 1) {
-        var filteredFoods2 = p2Suggestions.filter((food) => food.main_ingredient === selectedOption.main_ingredient);
+        var filteredFoods2 = p2Suggestions.filter((food) =>
+          selectedOptions.some(option => food.main_ingredient === option.main_ingredient)
+        );
         setP2Suggestions(filteredFoods2);
         console.log(p2Suggestions);
       };
     } else if (currentQuestion === 3) {
       if (currentPartner === 0) {
-        var filteredFoods1 = p1Suggestions.filter((food) => food.temp === selectedOption.temp);
+        var filteredFoods1 = p1Suggestions.filter((food) =>
+          selectedOptions.some(option => food.temp === option.temp)
+        );
         setP1Suggestions(filteredFoods1);
         console.log(p1Suggestions);
       } else if (currentPartner === 1) {
-        var filteredFoods2 = p2Suggestions.filter((food) => food.temp === selectedOption.temp);
+        var filteredFoods2 = p2Suggestions.filter((food) =>
+          selectedOptions.some(option => food.temp === option.temp)
+        );
         setP2Suggestions(filteredFoods2);
         console.log(p2Suggestions);
       };
     } else if (currentQuestion === 4) {
       if (currentPartner === 0) {
-        var filteredFoods1 = p1Suggestions.filter((food) => food.protein === selectedOption.protein);
+        var filteredFoods1 = p1Suggestions.filter((food) =>
+          selectedOptions.some(option => food.protein === option.protein)
+        );
         setP1Suggestions(filteredFoods1);
         console.log(p1Suggestions);
       } else if (currentPartner === 1) {
-        var filteredFoods2 = p2Suggestions.filter((food) => food.protein === selectedOption.protein);
+        var filteredFoods2 = p2Suggestions.filter((food) =>
+          selectedOptions.some(option => food.protein === option.protein)
+        );
         setP2Suggestions(filteredFoods2);
         console.log(p2Suggestions);
       };
     } else if (currentQuestion === 5) {
       if (currentPartner === 0) {
-        var filteredFoods1 = p1Suggestions.filter((food) => food.taste === selectedOption.taste);
+        var filteredFoods1 = p1Suggestions.filter((food) =>
+          selectedOptions.some(option => food.taste === option.taste)
+       );
         setP1Suggestions(filteredFoods1);
         console.log(p1Suggestions);
       } else if (currentPartner === 1) {
-        var filteredFoods2 = p2Suggestions.filter((food) => food.taste === selectedOption.taste);
+        var filteredFoods2 = p2Suggestions.filter((food) =>
+          selectedOptions.some(option => food.taste === option.taste)
+        );
         setP2Suggestions(filteredFoods2);
         console.log(p2Suggestions);
       };
     } else if (currentQuestion === 6) {
       if (currentPartner === 0) {
-        var filteredFoods1 = p1Suggestions.filter((food) => food.cooking_method === selectedOption.cooking_method);
+        var filteredFoods1 = p1Suggestions.filter((food) =>
+          selectedOptions.some(option => food.cooking_method === option.cooking_method)
+        );
         setP1Suggestions(filteredFoods1);
         console.log(p1Suggestions);
       } else if (currentPartner === 1) {
-        var filteredFoods2 = p2Suggestions.filter((food) => food.cooking_method === selectedOption.cooking_method);
+        var filteredFoods2 = p2Suggestions.filter((food) =>
+          selectedOptions.some(option => food.cooking_method === option.cooking_method)
+        );
         setP2Suggestions(filteredFoods2);
         console.log(p2Suggestions);
       };
     }
     setCurrentQuestion((prevIndex) => prevIndex + 1);
+    setSelectedOptions([]);
   };
   
   const handleDessertsNextQuestion = (selectedOption) => {
     if (currentQuestion === 3) {
       if (currentPartner === 0) {
-        var filteredFoods1 = p1Suggestions.filter((food) => food.temp === selectedOption.temp);
+        var filteredFoods1 = p1Suggestions.filter((food) =>
+          selectedOptions.some(option => food.temp === option.temp)
+        );
         setP1Suggestions(filteredFoods1);
         console.log(p1Suggestions);
       } else if (currentPartner === 1) {
-        var filteredFoods2 = p2Suggestions.filter((food) => food.temp === selectedOption.temp);
+        var filteredFoods2 = p2Suggestions.filter((food) =>
+          selectedOptions.some(option => food.temp === option.temp)
+        );
         setP2Suggestions(filteredFoods2);
         console.log(p2Suggestions);
       };
     } else if (currentQuestion === 4) {
       if (currentPartner === 0) {
-        var filteredFoods1 = p1Suggestions.filter((food) => food.protein === selectedOption.protein);
+        var filteredFoods1 = p1Suggestions.filter((food) =>
+          selectedOptions.some(option => food.protein === option.protein)
+        );
         setP1Suggestions(filteredFoods1);
         console.log(p1Suggestions);
       } else if (currentPartner === 1) {
-        var filteredFoods2 = p2Suggestions.filter((food) => food.protein === selectedOption.protein);
+        var filteredFoods2 = p2Suggestions.filter((food) =>
+          selectedOptions.some(option => food.protein === option.protein)
+        );
         setP2Suggestions(filteredFoods2);
         console.log(p2Suggestions);
       };
     } else if (currentQuestion === 5) {
       if (currentPartner === 0) {
-        var filteredFoods1 = p1Suggestions.filter((food) => food.taste === selectedOption.taste);
+        var filteredFoods1 = p1Suggestions.filter((food) =>
+          selectedOptions.some(option => food.taste === option.taste)
+       );
         setP1Suggestions(filteredFoods1);
         console.log(p1Suggestions);
       } else if (currentPartner === 1) {
-        var filteredFoods2 = p2Suggestions.filter((food) => food.taste === selectedOption.taste);
+        var filteredFoods2 = p2Suggestions.filter((food) =>
+          selectedOptions.some(option => food.taste === option.taste)
+        );
         setP2Suggestions(filteredFoods2);
         console.log(p2Suggestions);
       };
-    };
+    }
     setCurrentQuestion((prevIndex) => prevIndex + 2);
+    setSelectedOptions([]);
   };
-  
+
+  const handleSkip = () => {
+    setCurrentQuestion((prevIndex) => prevIndex + 1);
+    setSelectedOptions([]);
+  };
+
   const handleNextPartner = () => {
     setCurrentPartner((prevIndex) => prevIndex + 1);
     setCurrentQuestion(1);
@@ -158,9 +215,13 @@ function CouplesShow() {
                   switch (currentQuestion) {
                     case 0:
                       return categories.map((category) => (
-                        <button key={category.id} onClick={() => handleNextQuestion(category)}>
-                          {category.name}
-                        </button>
+                        <button key={category.id} onClick={() => handleSelection(category)}
+                        style={{
+                        backgroundColor: selectedOptions.includes(category) ? "lightblue" : "white",
+                        }}
+                      >
+                        {category.name}
+                      </button>
                       ));
                     case 1:
                       return p1Suggestions
@@ -168,7 +229,11 @@ function CouplesShow() {
                         index === self.findIndex(f => f.style === food.style)
                       )
                       .map((food) => (
-                        <button key={food.id} onClick={() => handleNextQuestion(food)}>
+                        <button key={food.id} onClick={() => handleSelection(food)}
+                        style={{
+                          backgroundColor: selectedOptions.includes(food) ? "lightblue" : "white",
+                        }}
+                        >
                           {food.style}
                         </button>
                       ));
@@ -178,7 +243,11 @@ function CouplesShow() {
                         index === self.findIndex(f => f.main_ingredient === food.main_ingredient)
                       )
                       .map((food) => (
-                        <button key={food.id} onClick={() => handleNextQuestion(food)}>
+                        <button key={food.id} onClick={() => handleSelection(food)}
+                        style={{
+                          backgroundColor: selectedOptions.includes(food) ? "lightblue" : "white",
+                        }}
+                        >
                           {food.main_ingredient}
                         </button>
                       ));
@@ -188,17 +257,13 @@ function CouplesShow() {
                         index === self.findIndex(f => f.temp === food.temp)
                       )
                       .map((food) => (
-                        <div key={food.id}>
-                          {food.category_id < 4 ? (
-                            <button onClick={() => handleNextQuestion(food)}>
-                              {food.temp}
-                            </button>
-                          ) : (
-                            <button onClick={() => handleDessertsNextQuestion(food)}>
-                              {food.temp}
-                            </button>
-                          )}
-                        </div>
+                        <button key={food.id} onClick={() => handleSelection(food)}
+                        style={{
+                          backgroundColor: selectedOptions.includes(food) ? "lightblue" : "white",
+                        }}
+                        >
+                          {food.temp}
+                        </button>
                       ));
                     case 4:
                       return p1Suggestions
@@ -206,7 +271,11 @@ function CouplesShow() {
                         index === self.findIndex(f => f.protein === food.protein)
                       )
                       .map((food) => (
-                        <button key={food.id} onClick={() => handleNextQuestion(food)}>
+                        <button key={food.id} onClick={() => handleSelection(food)}
+                        style={{
+                          backgroundColor: selectedOptions.includes(food) ? "lightblue" : "white",
+                        }}
+                        >
                           {food.protein}
                         </button>
                       ));
@@ -216,7 +285,11 @@ function CouplesShow() {
                         index === self.findIndex(f => f.taste === food.taste)
                       )
                       .map((food) => (
-                        <button key={food.id} onClick={() => handleNextQuestion(food)}>
+                        <button key={food.id} onClick={() => handleSelection(food)}
+                        style={{
+                          backgroundColor: selectedOptions.includes(food) ? "lightblue" : "white",
+                        }}
+                        >
                           {food.taste}
                         </button>
                       ));
@@ -226,7 +299,11 @@ function CouplesShow() {
                         index === self.findIndex(f => f.cooking_method === food.cooking_method)
                       )
                       .map((food) => (
-                        <button key={food.id} onClick={() => handleNextQuestion(food)}>
+                        <button key={food.id} onClick={() => handleSelection(food)}
+                        style={{
+                          backgroundColor: selectedOptions.includes(food) ? "lightblue" : "white",
+                        }}
+                        >
                           {food.cooking_method}
                         </button>
                       ));
@@ -255,18 +332,18 @@ function CouplesShow() {
                 {(() => {
                   switch (currentQuestion) {
                     case 0: //SHOULDNT BE CALLED
-                      return categories.map((category) => (
-                        <button key={category.id} onClick={() => handleNextQuestion(category)}>
-                          {category.name}
-                        </button>
-                      ));
+                      return null
                     case 1:
                       return p2Suggestions
                       .filter((food, index, self) =>
                         index === self.findIndex(f => f.style === food.style)
                       )
                       .map((food) => (
-                        <button key={food.id} onClick={() => handleNextQuestion(food)}>
+                        <button key={food.id} onClick={() => handleSelection(food)}
+                        style={{
+                          backgroundColor: selectedOptions.includes(food) ? "lightblue" : "white",
+                        }}
+                        >
                           {food.style}
                         </button>
                       ));
@@ -276,7 +353,11 @@ function CouplesShow() {
                         index === self.findIndex(f => f.main_ingredient === food.main_ingredient)
                       )
                       .map((food) => (
-                        <button key={food.id} onClick={() => handleNextQuestion(food)}>
+                        <button key={food.id} onClick={() => handleSelection(food)}
+                        style={{
+                          backgroundColor: selectedOptions.includes(food) ? "lightblue" : "white",
+                        }}
+                        >
                           {food.main_ingredient}
                         </button>
                       ));
@@ -286,17 +367,13 @@ function CouplesShow() {
                         index === self.findIndex(f => f.temp === food.temp)
                       )
                       .map((food) => (
-                        <div key={food.id}>
-                          {food.category_id < 4 ? (
-                            <button onClick={() => handleNextQuestion(food)}>
-                              {food.temp}
-                            </button>
-                          ) : (
-                            <button onClick={() => handleDessertsNextQuestion(food)}>
-                              {food.temp}
-                            </button>
-                          )}
-                        </div>
+                        <button key={food.id} onClick={() => handleSelection(food)}
+                        style={{
+                          backgroundColor: selectedOptions.includes(food) ? "lightblue" : "white",
+                        }}
+                        >
+                          {food.temp}
+                        </button>
                       ));
                     case 4:
                       return p2Suggestions
@@ -304,7 +381,11 @@ function CouplesShow() {
                         index === self.findIndex(f => f.protein === food.protein)
                       )
                       .map((food) => (
-                        <button key={food.id} onClick={() => handleNextQuestion(food)}>
+                        <button key={food.id} onClick={() => handleSelection(food)}
+                        style={{
+                          backgroundColor: selectedOptions.includes(food) ? "lightblue" : "white",
+                        }}
+                        >
                           {food.protein}
                         </button>
                       ));
@@ -314,7 +395,11 @@ function CouplesShow() {
                         index === self.findIndex(f => f.taste === food.taste)
                       )
                       .map((food) => (
-                        <button key={food.id} onClick={() => handleNextQuestion(food)}>
+                        <button key={food.id} onClick={() => handleSelection(food)}
+                        style={{
+                          backgroundColor: selectedOptions.includes(food) ? "lightblue" : "white",
+                        }}
+                        >
                           {food.taste}
                         </button>
                       ));
@@ -324,7 +409,11 @@ function CouplesShow() {
                         index === self.findIndex(f => f.cooking_method === food.cooking_method)
                       )
                       .map((food) => (
-                        <button key={food.id} onClick={() => handleNextQuestion(food)}>
+                        <button key={food.id} onClick={() => handleSelection(food)}
+                        style={{
+                          backgroundColor: selectedOptions.includes(food) ? "lightblue" : "white",
+                        }}
+                        >
                           {food.cooking_method}
                         </button>
                       ));
@@ -408,20 +497,50 @@ function CouplesShow() {
       ) : null }
   
       {currentQuestion < questions.length ? (
-        <button
-          style={{
-            marginTop: "20px",
-            padding: "10px 20px",
-            cursor: "pointer",
-            backgroundColor: "#d15b38",
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-          }}
-          onClick={() => setCurrentQuestion((prevIndex) => prevIndex + 1)}
-        >
-          SKIP
-        </button>
+        <div>
+          <div>
+            <button
+            className="special-button"
+            onClick={() => handleSkip()}
+            >
+              SKIP
+            </button>
+          </div>
+          
+          {currentQuestion < 3 && selectedOptions.length > 0 ? (
+            <button 
+              className="special-button"
+              onClick={() => handleNextQuestion()}
+            >
+              NEXT
+            </button>
+          ) : currentQuestion === 3 && selectedOptions.length > 0 ? (
+            <div>
+              {dessertCheck ? (
+                  <button 
+                    className="special-button"
+                    onClick={() => handleDessertsNextQuestion()}
+                  >
+                    NEXT
+                  </button>
+              ) : (
+                <button 
+                  className="special-button"
+                  onClick={() => handleNextQuestion()}
+                >
+                  NEXT
+                </button>
+              )}
+            </div>
+          ) : currentQuestion > 3 && selectedOptions.length > 0 ? (
+            <button
+              className="special-button"
+              onClick={() => handleNextQuestion()}
+            >
+              NEXT
+            </button>
+          ) : null }
+        </div>
       ) : null}
     </div>
   );  

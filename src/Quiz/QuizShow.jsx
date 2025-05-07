@@ -7,57 +7,94 @@ function QuizShow() {
   const [foods, setFoods] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0); // Current question index
   const [suggestions, setSuggestions] = useState([]); // Foods filtered by answers
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [dessertCheck, setDessertCheck]= useState(false);
 
-  const handleNextQuestion = (selectedOption) => {
+  const handleSelection = (selectedOption) => {
+    setSelectedOptions((prevSelections) => 
+      prevSelections.includes(selectedOption) ? prevSelections.filter((selections) => selections !== selectedOption) : [...prevSelections, selectedOption]
+    );
+    console.log(selectedOptions);
+  }
+
+  const handleNextQuestion = () => {
     if (currentQuestion === 0) {
-      const foodsCategory = foods.filter((food) => food.category_id === selectedOption.id);
+      const foodsCategory = foods.filter((food) => 
+        selectedOptions.some(option => food.category_id === option.id)
+      );
       setSuggestions(foodsCategory);
-      console.log(suggestions)
+      if (selectedOptions.length === 1 && selectedOptions.some(option => option.id === 4)) {
+        setDessertCheck(true);
+      };
     } else if (currentQuestion === 1) {
-      var filteredFoods = suggestions.filter((food) => food.style === selectedOption.style);
+      var filteredFoods = suggestions.filter((food) => 
+        selectedOptions.some(option => food.style === option.style)
+      );
       setSuggestions(filteredFoods);
       console.log(suggestions)
     } else if (currentQuestion === 2) {
-      var filteredFoods = suggestions.filter((food) => food.main_ingredient === selectedOption.main_ingredient);
+      var filteredFoods = suggestions.filter((food) => 
+        selectedOptions.some(option => food.main_ingredient === option.main_ingredient)
+      );
       setSuggestions(filteredFoods);
       console.log(suggestions)
     } else if (currentQuestion === 3) {
-      var filteredFoods = suggestions.filter((food) => food.temp === selectedOption.temp);
+      var filteredFoods = suggestions.filter((food) => 
+        selectedOptions.some(option => food.temp === option.temp)
+      );
       setSuggestions(filteredFoods);
       console.log(suggestions)
     } else if (currentQuestion === 4) {
-      var filteredFoods = suggestions.filter((food) => food.protein === selectedOption.protein);
+      var filteredFoods = suggestions.filter((food) => 
+        selectedOptions.some(option => food.protein === option.protein)
+      );
       setSuggestions(filteredFoods);
       console.log(suggestions)
     } else if (currentQuestion === 5) {
-      var filteredFoods = suggestions.filter((food) => food.taste === selectedOption.taste);
+      var filteredFoods = suggestions.filter((food) => 
+        selectedOptions.some(option => food.taste === option.taste)
+      );
       setSuggestions(filteredFoods);
       console.log(suggestions)
     } else if (currentQuestion === 6) {
-      var filteredFoods = suggestions.filter((food) => food.cooking_method === selectedOption.cooking_method);
+      var filteredFoods = suggestions.filter((food) => 
+        selectedOptions.some(option => food.cooking_method === option.cooking_method)
+      );
       setSuggestions(filteredFoods);
       console.log(suggestions)
     }
     setCurrentQuestion((prevIndex) => prevIndex + 1);
+    setSelectedOptions([]);
   };
 
   const handleDessertsNextQuestion = (selectedOption) => {
     if (currentQuestion === 3) {
-      var filteredFoods = suggestions.filter((food) => food.temp === selectedOption.temp);
+      var filteredFoods = suggestions.filter((food) => 
+        selectedOptions.some(option => food.temp === option.temp)
+      );
       setSuggestions(filteredFoods);
       console.log(suggestions)
     } else if (currentQuestion === 4) {
-      var filteredFoods = suggestions.filter((food) => food.protein === selectedOption.protein);
+      var filteredFoods = suggestions.filter((food) => 
+        selectedOptions.some(option => food.protein === option.protein)
+      );
       setSuggestions(filteredFoods);
       console.log(suggestions)
     } else if (currentQuestion === 5) {
-      var filteredFoods = suggestions.filter((food) => food.taste === selectedOption.taste);
+      var filteredFoods = suggestions.filter((food) => 
+        selectedOptions.some(option => food.taste === option.taste)
+    );
       setSuggestions(filteredFoods);
       console.log(suggestions)
     }
     setCurrentQuestion((prevIndex) => prevIndex + 2);
+    setSelectedOptions([]);
   };
   
+  const handleSkip = () => {
+    setCurrentQuestion((prevIndex) => prevIndex + 1);
+    setSelectedOptions([]);
+  };
 
   useEffect(() => {
     axios.get("http://localhost:3000/questions")
@@ -80,7 +117,11 @@ function QuizShow() {
               switch (currentQuestion) {
                 case 0:
                   return categories.map((category) => (
-                    <button key={category.id} onClick={() => handleNextQuestion(category)}>
+                    <button key={category.id} onClick={() => handleSelection(category)}
+                    style={{
+                      backgroundColor: selectedOptions.includes(category) ? "lightblue" : "white",
+                    }}
+                    >
                       {category.name}
                     </button>
                   ));
@@ -90,11 +131,13 @@ function QuizShow() {
                     index === self.findIndex(f => f.style === food.style)
                   )
                   .map((food) => (
-                    <div key={food.id}>
-                      <button key={food.id} onClick={() => handleNextQuestion(food)}>
-                        {food.style}
-                      </button>
-                    </div>
+                    <button key={food.id} onClick={() => handleSelection(food)}
+                    style={{
+                      backgroundColor: selectedOptions.includes(food) ? "lightblue" : "white",
+                    }}
+                    >
+                      {food.style}
+                    </button>
                   ));
                 case 2:
                   return suggestions
@@ -102,7 +145,11 @@ function QuizShow() {
                     index === self.findIndex(f => f.main_ingredient === food.main_ingredient)
                   )
                   .map((food) => (
-                    <button key={food.id} onClick={() => handleNextQuestion(food)}>
+                    <button key={food.id} onClick={() => handleSelection(food)}
+                    style={{
+                      backgroundColor: selectedOptions.includes(food) ? "lightblue" : "white",
+                    }}
+                    >
                       {food.main_ingredient}
                     </button>
                   ));
@@ -112,17 +159,13 @@ function QuizShow() {
                     index === self.findIndex(f => f.temp === food.temp)
                   )
                   .map((food) => (
-                    <div key={food.id}>
-                      {food.category_id < 4 ? (
-                        <button onClick={() => handleNextQuestion(food)}>
-                          {food.temp}
-                        </button>
-                      ) : (
-                        <button onClick={() => handleDessertsNextQuestion(food)}>
-                          {food.temp}
-                        </button>
-                      )}
-                    </div>
+                    <button key={food.id} onClick={() => handleSelection(food)}
+                    style={{
+                      backgroundColor: selectedOptions.includes(food) ? "lightblue" : "white",
+                    }}
+                    >
+                      {food.temp}
+                    </button>
                   ));
                 case 4:
                   return suggestions
@@ -130,7 +173,11 @@ function QuizShow() {
                     index === self.findIndex(f => f.protein === food.protein)
                   )
                   .map((food) => (
-                    <button key={food.id} onClick={() => handleNextQuestion(food)}>
+                    <button key={food.id} onClick={() => handleSelection(food)}
+                    style={{
+                      backgroundColor: selectedOptions.includes(food) ? "lightblue" : "white",
+                    }}
+                    >
                       {food.protein}
                     </button>
                   ));
@@ -140,7 +187,11 @@ function QuizShow() {
                     index === self.findIndex(f => f.taste === food.taste)
                   )
                   .map((food) => (
-                    <button key={food.id} onClick={() => handleNextQuestion(food)}>
+                    <button key={food.id} onClick={() => handleSelection(food)}
+                    style={{
+                      backgroundColor: selectedOptions.includes(food) ? "lightblue" : "white",
+                    }}
+                    >
                       {food.taste}
                     </button>
                   ));
@@ -150,7 +201,11 @@ function QuizShow() {
                     index === self.findIndex(f => f.cooking_method === food.cooking_method)
                   )
                   .map((food) => (
-                    <button key={food.id} onClick={() => handleNextQuestion(food)}>
+                    <button key={food.id} onClick={() => handleSelection(food)}
+                    style={{
+                      backgroundColor: selectedOptions.includes(food) ? "lightblue" : "white",
+                    }}
+                    >
                       {food.cooking_method}
                     </button>
                   ));
@@ -163,21 +218,51 @@ function QuizShow() {
       )}
   
       {currentQuestion < questions.length ? (
-        <button
-          style={{
-            marginTop: "20px",
-            padding: "10px 20px",
-            cursor: "pointer",
-            backgroundColor: "#d15b38",
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-          }}
-          onClick={() => setCurrentQuestion((prevIndex) => prevIndex + 1)}
-        >
-          SKIP
-        </button>
+        <div>
+          <div>
+            <button
+            className="special-button"
+            onClick={() => handleSkip()}
+            >
+              SKIP
+            </button>
+          </div>
+          {currentQuestion < 3 && selectedOptions.length > 0 ? (
+            <button 
+              className="special-button"
+              onClick={() => handleNextQuestion()}
+            >
+              NEXT
+            </button>
+          ) : currentQuestion === 3 && selectedOptions.length > 0 ? (
+            <div>
+              {dessertCheck ? (
+                  <button 
+                    className="special-button"
+                    onClick={() => handleDessertsNextQuestion()}
+                  >
+                    NEXT
+                  </button>
+              ) : (
+                <button 
+                  className="special-button"
+                  onClick={() => handleNextQuestion()}
+                >
+                  NEXT
+                </button>
+              )}
+            </div>
+          ) : currentQuestion > 3 && selectedOptions.length > 0 ? (
+            <button
+              className="special-button"
+              onClick={() => handleNextQuestion()}
+            >
+              NEXT
+            </button>
+          ) : null }
+        </div>
       ) : null}
+
   
       {currentQuestion >= questions.length ? (
         <div>

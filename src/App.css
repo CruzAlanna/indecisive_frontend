@@ -39,3 +39,13 @@ button {
   padding: 10px 20px;
   cursor: pointer;
 }
+
+.special-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #d15b38;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
