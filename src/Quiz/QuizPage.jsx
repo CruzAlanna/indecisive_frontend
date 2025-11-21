@@ -2,6 +2,8 @@ import { useState } from 'react';
 import QuizMain from './QuizMain';
 import QuizShow from './QuizShow';
 import { Modal } from '../Modal';
+import React from 'react';
+import '../styles/Quiz.css';
 
 function QuizPage() {
   const [isQuizShowVisible, setIsQuizShowVisible] = useState(false);

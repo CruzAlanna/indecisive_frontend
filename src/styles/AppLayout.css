@@ -1,0 +1,33 @@
+/* App Layout Styles */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  text-align: center;
+  animation: fadeIn var(--transition-normal);
+}
+
+.app-main {
+  flex: 1;
+  padding: var(--space-4);
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+hr {
+  width: 100%;
+  max-width: 1200px;
+  margin: var(--space-3) auto;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 0;
+  }
+  
+  .app-main {
+    padding: var(--space-3);
+  }
+}

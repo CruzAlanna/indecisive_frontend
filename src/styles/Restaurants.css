@@ -1,0 +1,157 @@
+.restaurants-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-4);
+}
+
+.restaurants-search {
+  display: flex;
+  gap: var(--space-2);
+  margin: var(--space-4) 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.restaurants-search input {
+  flex: 1;
+  padding: var(--space-3);
+}
+
+.restaurants-search select {
+  width: 40%;
+  padding: var(--space-3);
+}
+
+.restaurant-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-5);
+  margin-top: var(--space-5);
+}
+
+.restaurant-card {
+  background-color: white;
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.restaurant-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.restaurant-card h2 {
+  color: var(--color-secondary);
+  margin-bottom: var(--space-2);
+}
+
+.restaurant-card p {
+  color: var(--color-neutral-600);
+  font-style: italic;
+  margin-bottom: var(--space-4);
+}
+
+.restaurant-card button {
+  width: 100%;
+  margin-top: var(--space-2);
+}
+
+/* Restaurant detail modal */
+.restaurant-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn var(--transition-fast);
+}
+
+.restaurant-modal {
+  background-color: white;
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  max-width: 800px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp var(--transition-normal);
+}
+
+.restaurant-modal h1 {
+  color: var(--color-bold-contrast);
+  margin-bottom: var(--space-2);
+}
+
+.restaurant-modal h3 {
+  color: var(--color-secondary);
+  font-style: italic;
+  margin-bottom: var(--space-4);
+}
+
+.restaurant-menu-section {
+  margin-top: var(--space-5);
+}
+
+.restaurant-menu-section h2 {
+  color: var(--color-secondary);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-neutral-200);
+  margin-bottom: var(--space-3);
+}
+
+.restaurant-menu-item {
+  padding: var(--space-2) var(--space-3);
+  margin-bottom: var(--space-2);
+  background-color: var(--color-neutral-50);
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast);
+}
+
+.restaurant-menu-item:hover {
+  background-color: var(--color-neutral-100);
+}
+
+.close-modal-button {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  background: none;
+  border: none;
+  font-size: var(--font-size-xl);
+  color: var(--color-neutral-600);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.close-modal-button:hover {
+  color: var(--color-neutral-900);
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .restaurants-search {
+    flex-direction: column;
+  }
+  
+  .restaurants-search select {
+    width: 100%;
+  }
+  
+  .restaurant-display {
+    grid-template-columns: 1fr;
+  }
+  
+  .restaurant-modal {
+    padding: var(--space-4);
+    width: 95%;
+  }
+}

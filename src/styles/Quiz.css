@@ -1,0 +1,168 @@
+.quiz-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-4);
+}
+
+.quiz-box {
+  background-color: white;
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-md);
+  margin: var(--space-4) 0;
+  animation: fadeIn var(--transition-normal);
+}
+
+.quiz-box h1 {
+  color: var(--color-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.quiz-box h2 {
+  color: var(--color-bold-contrast);
+  margin-bottom: var(--space-5);
+  font-size: var(--font-size-xl);
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--space-3);
+  margin: var(--space-4) 0;
+}
+
+.option-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  background-color: var(--color-bold-contrast);
+  border: 2px solid var(--color-neutral-200);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+  font-weight: 500;
+  height: 100%;
+  min-height: 80px;
+}
+
+.option-button:hover {
+  border-color: var(--color-primary-light);
+  background-color: var(--color-bold-contrast-light);
+  transform: translateY(-2px);
+}
+
+.option-button.selected {
+  background-color: var(--color-primary-light) !important;
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.quiz-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-5);
+}
+
+.special-button {
+  font-weight: 600;
+}
+
+.skip-button {
+  background-color: var(--color-neutral-200);
+  color: var(--color-neutral-700);
+}
+
+.skip-button:hover {
+  background-color: var(--color-neutral-300);
+}
+
+.next-button {
+  background-color: var(--color-secondary);
+}
+
+.next-button:hover {
+  background-color: var(--color-secondary-dark);
+}
+
+/* Results styling */
+.results-container {
+  margin-top: var(--space-6);
+}
+
+.food-card {
+  background-color: white;
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  margin-bottom: var(--space-4);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  animation: slideUp var(--transition-normal);
+  animation-fill-mode: both;
+}
+
+.food-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.food-card h3 {
+  color: var(--color-bold-contrast);
+  margin-bottom: var(--space-2);
+}
+
+.food-card p {
+  margin-bottom: var(--space-2);
+  color: var(--color-neutral-700);
+}
+
+/* For couples quiz */
+.partner-indicator {
+  font-size: var(--font-size-lg);
+  color: var(--color-secondary);
+  background-color: var(--color-secondary-light);
+  color: white;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  display: inline-block;
+  margin-bottom: var(--space-4);
+}
+
+.matching-result {
+  background-color: var(--color-accent);
+  color: white;
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
+}
+
+.matching-result h2 {
+  color: white;
+}
+
+/* Animations for results */
+.food-card:nth-child(1) { animation-delay: 0.1s; }
+.food-card:nth-child(2) { animation-delay: 0.2s; }
+.food-card:nth-child(3) { animation-delay: 0.3s; }
+.food-card:nth-child(4) { animation-delay: 0.4s; }
+.food-card:nth-child(5) { animation-delay: 0.5s; }
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .quiz-box {
+    padding: var(--space-4);
+  }
+  
+  .options-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+  
+  .quiz-actions {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  
+  .quiz-actions button {
+    width: 100%;
+  }
+}

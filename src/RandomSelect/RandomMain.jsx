@@ -56,81 +56,75 @@ function RandomMain() {
   }, [suggestFood]);
   
   return (
-    <main>
-      <div className="container">
-        <h1>Random Dish Generator</h1>
-        <p>Our Random Dish Generator will suggest a dish from our menu for you! You can choose to be given a completely random suggestion or you can select either entree, appetizer, snack, or dessert to get a random dish from that specific category!</p>
-      </div>
-      <hr></hr>
+    <div className="random-box">
       <div className="container">
         <h2>Generate Random Selection</h2>
-        <h3>Do you want to generate a random suggestion based on category?</h3>
-        <button onClick={toggleFilter}>
-          {filterOn ? "YES" : "NO"}
+        <p>Do you want to generate a random suggestion based on category?</p>
+        <button 
+          className={`toggle-button ${filterOn ? 'active' : ''}`}
+          onClick={toggleFilter}
+        >
+          {filterOn ? "Filter By Category" : "Completely Random"}
         </button>
-        <br></br>
+        <br />
         {filterOn ? (
           <div>
             <h3>Select A Category</h3>
-            {categories.map((category) => (
-              <button
-              key={category.id}
-              onClick={() => {
-                filterCategory(category);
-                setSelectedCategory(category.id);
-              }}
-              style={{
-                backgroundColor: selectedCategory === category.id ? "lightblue" : "white",
-              }}
+            <div className="category-buttons">
+              {categories.map((category) => (
+                <button
+                  key={category.id}
+                  className={`category-button ${selectedCategory === category.id ? 'selected' : ''}`}
+                  onClick={() => {
+                    filterCategory(category);
+                    setSelectedCategory(category.id);
+                  }}
+                >
+                  {category.name}
+                </button>
+              ))}
+            </div>
+            {suggestCategory.length > 0 && (
+              <button 
+                className="generate-button"
+                onClick={() => randomFilteredSelect()}
               >
-              {category.name}
+                GET SUGGESTION
               </button>
-            ))}
-            <br></br>
-            {suggestCategory.length === 0 ? (
-              null
-            ) : (
-              <button onClick={() => randomFilteredSelect()}>GET SUGGESTION</button>
-            ) }
+            )}
           </div>
         ) : (
-          <button onClick={() => randomSelect()}>GET SUGGESTION</button>
+          <button 
+            className="generate-button"
+            onClick={() => randomSelect()}
+          >
+            GET SUGGESTION
+          </button>
         )}
       </div>
 
-      <div className="container">
-        {Object.keys(suggestFood).length === 0 ? (
-          null
-        ) : (
-          <div className="container">
-            {categories.find((cat) => cat.id === suggestFood.category_id) ? (
-              <div>
-                <h1>
-                  Your Suggestion: ({categories.find((cat) => cat.id === suggestFood.category_id).name})
-                </h1>
-              </div>
-            ) : (
-              <div>
-                <h1>No Category Found</h1>
-              </div>
+      {Object.keys(suggestFood).length > 0 && (
+        <div className="suggestion-result">
+          {categories.find((cat) => cat.id === suggestFood.category_id) ? (
+            <h1>
+              Your Suggestion: {categories.find((cat) => cat.id === suggestFood.category_id).name}
+            </h1>
+          ) : (
+            <h1>Your Random Suggestion</h1>
+          )}
+          <hr />
+          <div key={suggestFood.id} className="result-card">
+            <h3>{suggestFood.name} ({suggestFood.style})</h3>
+            <p><strong>Description:</strong> This {suggestFood.main_ingredient} dish is {suggestFood.taste}</p>
+            <p><strong>Served:</strong> {suggestFood.temp}</p>
+            {suggestFood.category_id < 4 && (
+              <p><strong>Protein:</strong> {suggestFood.protein}</p>
             )}
-            <hr></hr>
-            <div key={suggestFood.id}>
-              <h3>{suggestFood.name} ({suggestFood.style})</h3>
-              <p>Description: This {suggestFood.main_ingredient} dish is {suggestFood.taste}</p>
-              <p>Served: {suggestFood.temp}</p>
-              {suggestFood.category_id < 4 ? (
-                <div>
-                  <p>Protein: {suggestFood.protein}</p>
-                </div>
-              ) : null }
-              <p>Cooking Method: {suggestFood.cooking_method}</p>
-              <hr></hr>
-            </div>
+            <p><strong>Cooking Method:</strong> {suggestFood.cooking_method}</p>
           </div>
-        )}
-      </div>
-    </main>
+        </div>
+      )}
+    </div>
   )
 }
 

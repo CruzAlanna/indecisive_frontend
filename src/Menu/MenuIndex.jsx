@@ -25,12 +25,12 @@ function MenuIndex({ foods, categories, onShow }) {
 
   return (
     <div>
-      <div style={{ textAlign: 'center' }}>
+      <div>
         <h1>Menu</h1>
         <p>{foods.length} dishes to choose from!</p>
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+      <div className="search-bar">
         <input
           type="text"
           placeholder="Search..."
@@ -46,27 +46,33 @@ function MenuIndex({ foods, categories, onShow }) {
         </select>
       </div>
 
-      <hr></hr>
+      <hr />
       <div className="menu-display">
         {categories.map((category) => (
-          <div key={category.id}>
-            <div className="container">
-              <h2>{category.name}</h2>
-              {/* Filter foods by category.id */}
-              {filteredFoods
-                .filter((food) => food.category_id === category.id)
-                .map((food) => (
-                  <div key={food.id}>
-                    <p>{food.name}</p>
-                    <button onClick={() => onShow(food) }>View Dish Details</button>
-                  </div>
-                ))}
-            </div>
+          <div key={category.id} className="category-section">
+            <h2>{category.name}</h2>
+            {/* Filter foods by category.id */}
+            {filteredFoods
+              .filter((food) => food.category_id === category.id)
+              .map((food) => (
+                <div key={food.id} className="menu-item">
+                  <div className="menu-item-name">{food.name}</div>
+                  <button 
+                    className="menu-item-button"
+                    onClick={() => onShow(food)}
+                  >
+                    View Details
+                  </button>
+                </div>
+              ))}
+              {filteredFoods.filter(food => food.category_id === category.id).length === 0 && (
+                <p>No {category.name.toLowerCase()} found.</p>
+              )}
           </div>
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 export default MenuIndex;

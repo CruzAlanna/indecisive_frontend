@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import RestaurantsIndex from './RestaurantsIndex';
 import RestaurantsShow from './RestaurantsShow';
 import { Modal } from '../Modal';
+import '../styles/Restaurants.css';
 
 function RestaurantsPage() {
   const [foods, setFoods] = useState([]);
@@ -31,18 +32,45 @@ function RestaurantsPage() {
     setCurrentRestaurant(restaurant);
   };
 
-  useEffect(handleIndex, []);
+  const closeModal = () => {
+    setIsRestaurantShowVisible(false);
+  }
 
+  // Close modal when pressing escape key
+  useEffect(() => {
+    const handleEsc = (event) => {
+      if (event.keyCode === 27) closeModal();
+    };
+    window.addEventListener('keydown', handleEsc);
+    
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, []);
+
+  useEffect(handleIndex, []);
+  
   return (
-    <main>
-      <div>
-        <RestaurantsIndex restaurants={restaurants} onShow={handleRestaurantShow} />
-        <Modal show={isRestaurantShowVisible} onClose={() => setIsRestaurantShowVisible(false)}>
-          <RestaurantsShow restaurant={currentRestaurant} foods={foods} categories={categories} />
-        </Modal>
-      </div>
-    </main>
-  )
+    <div className="restaurants-container">
+      <RestaurantsIndex 
+        restaurants={restaurants} 
+        onShow={handleRestaurantShow} 
+      />
+      
+      {isRestaurantShowVisible && (
+        <div className="restaurant-modal-backdrop" onClick={closeModal}>
+          <div className="restaurant-modal" onClick={(e) => e.stopPropagation()}>
+            <RestaurantsShow 
+              restaurant={currentRestaurant} 
+              foods={foods} 
+              categories={categories} 
+            />
+            <button className="close-modal-button" onClick={closeModal}>×</button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default RestaurantsPage;

@@ -1,0 +1,110 @@
+.random-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-4);
+}
+
+.random-box {
+  background-color: white;
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-md);
+  margin: var(--space-4) 0;
+}
+
+.toggle-button {
+  background-color: var(--color-neutral-200);
+  color: var(--color-neutral-700);
+  padding: var(--space-2) var(--space-5);
+  border-radius: var(--radius-full);
+  margin: var(--space-4) 0;
+  position: relative;
+  transition: all var(--transition-normal);
+  font-weight: 600;
+}
+
+.toggle-button.active {
+  background-color: var(--color-primary-light);
+  color: var(--color-neutral-800);
+}
+
+.category-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--space-3);
+  margin: var(--space-4) 0;
+}
+
+.category-button {
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bold-contrast);
+  border: 2px solid var(--color-neutral-200);
+  transition: all var(--transition-normal);
+}
+
+.category-button:hover {
+  border-color: var(--color-bold-contrast-light);
+  transform: translateY(-2px);
+}
+
+.category-button.selected {
+  background-color: var(--color-primary-light);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.generate-button {
+  margin-top: var(--space-4);
+  background-color: var(--color-secondary);
+  color: white;
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--font-size-lg);
+}
+
+.generate-button:hover {
+  background-color: var(--color-secondary-dark);
+}
+
+.suggestion-result {
+  margin-top: var(--space-6);
+  padding: var(--space-4);
+  background-color: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  animation: popIn var(--transition-normal);
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.9); opacity: 0; }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.suggestion-result h1 {
+  color: var(--color-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.result-card {
+  padding: var(--space-4);
+  background-color: var(--color-neutral-50);
+  border-radius: var(--radius-md);
+  margin-top: var(--space-4);
+}
+
+.result-card h3 {
+  color: var(--color-bold-contrast);
+  margin-bottom: var(--space-2);
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .random-box {
+    padding: var(--space-4);
+  }
+  
+  .category-buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -15,15 +15,15 @@ function RestaurantsIndex({ restaurants, onShow }) {
       if (!searchQuery) return true;
       return restaurant[searchAttribute]?.toLowerCase().includes(searchQuery.toLowerCase());
     });
-  
+
   return (
     <div>
-      <div style={{ textAlign: 'center' }}>
+      <div>
         <h1>Restaurants</h1>
         <p>{restaurants.length} restaurants to browse!</p>
       </div>
 
-      <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+      <div className="restaurants-search">
         <input
           type="text"
           placeholder="Search..."
@@ -39,20 +39,25 @@ function RestaurantsIndex({ restaurants, onShow }) {
         </select>
       </div>
 
-      <hr></hr>
+      <hr />
       <div className="restaurant-display">
         {filteredRestaurants.map((restaurant) => (
-          <div key={restaurant.id}>
-            <div className="container">
-              <h2>{restaurant.name}</h2>
-              <p>{restaurant.style}</p>
-              <button onClick={() => onShow(restaurant) }>View Restaurant Menu</button>
-            </div>
+          <div key={restaurant.id} className="restaurant-card">
+            <h2>{restaurant.name}</h2>
+            <p>{restaurant.style} • {restaurant.location}</p>
+            <button 
+              onClick={() => onShow(restaurant)}
+            >
+              View Restaurant Menu
+            </button>
           </div>
         ))}
+        {filteredRestaurants.length === 0 && (
+          <p>No restaurants found matching your search.</p>
+        )}
       </div>
     </div>
-  )
+  );
 }
 
 export default RestaurantsIndex;

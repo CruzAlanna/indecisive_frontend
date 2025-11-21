@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import './index.css'
 
 import App from './App'
-import About from './pages/AboutPage'
+import About from './AboutPage'
 import MenuPage from './Menu/MenuPage'
 import RestaurantsPage from './Restaurants/RestaurantsPage'
 import QuizPage from './Quiz/QuizPage'

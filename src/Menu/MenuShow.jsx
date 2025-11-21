@@ -3,17 +3,27 @@ function MenuShow({ food }) {
     <div>
       <h1>{food.name}</h1>
       <h3>{food.style}</h3>
-      <hr></hr>
-      <p>Description: This {food.main_ingredient} dish is {food.taste}</p>
-      <p>Served: {food.temp}</p>
-      {food.category_id < 4 ? (
-        <div>
-          <p>Protein: {food.protein}</p>
+      <hr />
+      <div className="food-detail">
+        <span className="food-detail-label">Description: </span>
+        This {food.main_ingredient} dish is {food.taste}
+      </div>
+      <div className="food-detail">
+        <span className="food-detail-label">Served: </span>
+        {food.temp}
+      </div>
+      {food.category_id < 4 && (
+        <div className="food-detail">
+          <span className="food-detail-label">Protein: </span>
+          {food.protein}
         </div>
-      ) : null }
-      <p>Cooking Method: {food.cooking_method}</p>
+      )}
+      <div className="food-detail">
+        <span className="food-detail-label">Cooking Method: </span>
+        {food.cooking_method}
+      </div>
     </div>
-  )
+  );
 }
 
 export default MenuShow;

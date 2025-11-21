@@ -1,25 +1,57 @@
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
+import './styles/Header.css';
 
 function Header() {
- return (
-    <header> 
-      <div>
-        <div className="logo">
-          <h1>Indecis¿ve</h1>
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  // Close mobile menu when navigating
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location]);
+
+  return (
+    <header className={`header ${scrolled ? 'scrolled' : ''}`}>
+      <div className="header-container">
+        <div className="header-logo">
+          <h1>Indecis<span>¿</span>ve</h1>
         </div>
-        <nav style={{ background: '#eee', padding: '10px', marginBottom: '20px' }}>
-          <ul style={{ listStyle: 'none', display: 'flex', alignItems: 'center', gap: '15px', margin: 0, padding: 0 }}>
-            <li><Link to="/">About</Link></li>
-            <li><Link to="/menu">Menu</Link></li>
-            <li><Link to="/restaurants">Restaurants</Link></li>
-            <li><Link to="/quiz">Quiz</Link></li>
-            <li><Link to="/partners">Couple's Quiz</Link></li>
-            <li><Link to="/random">Random Suggestion</Link></li>
-          </ul>
+        
+        <nav className={`header-nav ${mobileMenuOpen ? 'active' : ''}`}>
+          <Link to="/">Home</Link>
+          <Link to="/quiz">Quiz</Link>
+          <Link to="/partners">Couples Quiz</Link>
+          <Link to="/random">Random</Link>
+          <Link to="/menu">Menu</Link>
+          <Link to="/restaurants">Restaurants</Link>
         </nav>
+        
+        <div className="header-mobile-menu" onClick={toggleMobileMenu}>
+          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </div>
       </div>
     </header>
-  )
+  );
 };
 
 export default Header;
