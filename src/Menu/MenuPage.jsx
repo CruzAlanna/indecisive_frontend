@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { apiUrl } from '../api';
 import MenuIndex from './MenuIndex';
 import MenuShow from './MenuShow';
 import '../styles/Menu.css';
@@ -11,11 +12,11 @@ function MenuPage() {
   const [currentFood, setCurrentFood] = useState({});
 
   const handleIndex = () => {
-    axios.get("http://localhost:3000/foods")
+    axios.get(apiUrl('/foods'))
     .then((response) => {
       setFoods(response.data);
     })
-    axios.get("http://localhost:3000/categories")
+    axios.get(apiUrl('/categories'))
     .then((response) => {
       setCategories(response.data);
     })

@@ -6,7 +6,7 @@ function MenuShow({ food }) {
       <hr />
       <div className="food-detail">
         <span className="food-detail-label">Description: </span>
-        This {food.main_ingredient} dish is {food.taste}
+        {food.description || `This ${food.main_ingredient} dish is ${food.taste}`}
       </div>
       <div className="food-detail">
         <span className="food-detail-label">Served: </span>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { apiUrl } from '../api';
 
 function CouplesShow() {
   const [partners, setPartners] = useState([]);
@@ -161,24 +162,24 @@ function CouplesShow() {
   };
 
   const handleSuggestions = () => {
-    const set1 = new Set(p1Suggestions);
-    const duplicates = p2Suggestions.filter(food => set1.has(food));
+    const p1Ids = new Set(p1Suggestions.map((food) => food.id));
+    const duplicates = p2Suggestions.filter((food) => p1Ids.has(food.id));
     setSuggestions(duplicates);
-    setCheckMatching(duplicates.length)
+    setCheckMatching(duplicates.length);
   };
 
   useEffect(() => {
-    axios.get("http://localhost:3000/partners")
+    axios.get(apiUrl('/partners'))
     .then((response) => setPartners(response.data));
     console.log(partners); // just here so it is not "unused"
 
-    axios.get("http://localhost:3000/questions")
+    axios.get(apiUrl('/questions'))
     .then((response) => setQuestions(response.data));
 
-    axios.get("http://localhost:3000/categories")
+    axios.get(apiUrl('/categories'))
     .then((response) => setCategories(response.data));
 
-    axios.get("http://localhost:3000/foods")
+    axios.get(apiUrl('/foods'))
     .then((response) => setFoods(response.data));
   }, []);
 

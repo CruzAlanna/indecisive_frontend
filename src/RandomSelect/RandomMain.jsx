@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { apiUrl } from '../api';
 
 function RandomMain() {
   const [foods, setFoods] = useState([]);
@@ -36,10 +37,10 @@ function RandomMain() {
   
   
   useEffect(() => {
-    axios.get("http://localhost:3000/categories")
+    axios.get(apiUrl('/categories'))
     .then((response) => setCategories(response.data));
 
-    axios.get("http://localhost:3000/foods")
+    axios.get(apiUrl('/foods'))
     .then((response) => setFoods(response.data));
   }, []);
 

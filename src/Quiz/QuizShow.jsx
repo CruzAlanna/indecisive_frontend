@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { apiUrl } from '../api';
 
 function QuizShow() {
   const [questions, setQuestions] = useState([]);
@@ -87,13 +88,13 @@ function QuizShow() {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:3000/questions")
+    axios.get(apiUrl('/questions'))
     .then((response) => setQuestions(response.data));
 
-    axios.get("http://localhost:3000/categories")
+    axios.get(apiUrl('/categories'))
     .then((response) => setCategories(response.data));
 
-    axios.get("http://localhost:3000/foods")
+    axios.get(apiUrl('/foods'))
     .then((response) => setFoods(response.data));
   }, []);
 
