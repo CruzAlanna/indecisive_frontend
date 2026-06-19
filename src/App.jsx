@@ -4,9 +4,10 @@ import { Outlet } from 'react-router-dom';
 import Footer from './Footer'
 import axios from 'axios';
 
-axios.defaults.baseURL = process.env.NODE_ENV === "development" 
-  ? "http://localhost:3000" 
-  : "https://indecisive-app.onrender.com";
+// axios.defaults.baseURL = process.env.NODE_ENV === "development" 
+//   ? "http://localhost:3000" 
+//   : "https://indecisive-app.onrender.com";
+// ^ redundant - api.js - Might be conflicting in production
 
 function App() {
   return (
