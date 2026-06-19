@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.MODE === "development" 
+export const API_BASE_URL = import.meta.env.MODE === "development" 
 ? "http://localhost:3000" 
 : "https://indecisive-app.onrender.com";
 
